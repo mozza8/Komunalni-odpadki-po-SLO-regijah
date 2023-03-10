@@ -62,6 +62,7 @@ slo = df.loc[0][1:]
 slo = slo.astype(int)
 normalized_slo = slo.apply(lambda x: (x - slo.min()) / (slo.max() - slo.min()))
 
+# naredim kopijo dataframea da deluje naslednja funkcija
 d = vsi.copy()
 
 # normaliziram podatke za posamezne regije
@@ -124,7 +125,7 @@ p11.title.text_color = "magenta"
 p11.line(x='x',y='y11', source=source,color='magenta', line_width=3)
 p11.line(x='x',y='y13', source=source,color='black',legend_label="Slovenija", line_width=3)
 
-# --------------------------------------TORTNI DIAGRAM - seštejem količine vseh let po regijah------------------------------------------------
+# ----------------------------------------------------------------TORTNI DIAGRAM - seštejem količine vseh let po regijah-------------------------------------------------------------------------
 
 # vsota količine smeti za vsa leta
 slovar = {}
@@ -209,10 +210,11 @@ data_preb['color'] = barve
 # sortiranje vsot po velikosti
 data_preb = data_preb.sort_values(by=['vsota'], ascending=False)
 
+# računam deleže usake regije
 vsota_vseh = data_preb['vsota'].sum()
 data_preb['procent'] = round((data_preb['vsota'] / vsota_vseh) * 100,2)
 
-# ------------------------------------------------------------------------TORTNI DIAGRAM Prebivalci-----------------------------------------------------------
+# ------------------------------------------------------------------------TORTNI DIAGRAM Prebivalci---------------------------------------------------------------------------------------
 
 pre = figure(height=550, width=740, title="Regije po številu prebivalcev", toolbar_location=None,
            tools="click", tooltips=str('@procent %'), x_range=(-0.5, 1.0))
@@ -239,6 +241,9 @@ z = zaposleni.copy()
 # normalizacija števila zaposlenih po regijah
 for i in range(len(zaposleni)):
     z.iloc[i] = zaposleni.iloc[i].apply(lambda x: (x - zaposleni.iloc[i].min()) / (zaposleni.iloc[i].max() - zaposleni.iloc[i].min()))
+
+
+#--------------------------------------------------------------------------Grafi odpadkov v povezavi z zaposlenimi-----------------------------------------------------------------------
 
 # podatki za nove linearne grafe - primerjava med zaposlenimi in količinami odpadkov po regijah
 podatki= { 'x': normalized_slo[3:].index,
@@ -334,14 +339,17 @@ f13.line(x='x',y='y_13', source=podatki,color='skyblue',legend_label="Zaposleni"
 f13.line(x='x',y='y13', source=podatki,color='black',legend_label="Odpadki", line_width=3)
 f13.legend.location = "top_center"
 
+# grid grafov zaposleni v odpadki
 gridF=gridplot([f1,f2,f3,f6,f7,f11], ncols=3)
 
 # pruredim dataframe da dobim enake letnice pri obeh
-vsi_brez = vsi.iloc[:,6:]
-preb_brez = po_regijah.iloc[:,:-1]
-print(preb_brez)
+vsi_brez = vsi.iloc[:,6:]                 #      Odpadki po regijah od leta 2008 do 2021
+preb_brez = po_regijah.iloc[:,:-1]        #      Prebivalci brez slovenije od leta 2008 do 2021
+print('----------------------------------------------------------------------------------------------------------')
+print(vsi_brez)
+print('----------------------------------------------------------------------------------------------------------')
 
-# naredim dva slovarja, da lahko potem ustvarim nova dataframa
+# naredim dva slovarja, da lahko potem ustvarim nova dataframa , računam povprečja regij po letih
 slovar_brez = {}
 slovar2 = {}
 for i in vsi_brez.index:
@@ -361,10 +369,14 @@ together = pd.merge(data_smeti, data_prebivalci, on=['regija'])
 
 # dodam nov stolpec z razmerji
 together['na_prebivalca(tone)'] = together['vsota_povp'] / together['sestevek_povp']
+
 # sortiram po velikosti prebivalcev
 together = together.sort_values(by=['sestevek_povp'], ascending=False)
 print(together)
 
+# -----------------------------------------------------------------------------------BUBBLE GRAF------------------------------------------------------------------------------------
+
+# Ustvarim podatke za Bubble graf, izbiram le prvih 6 regij
 novi = {'Prebivalci': together["sestevek_povp"].head(6),
         'Odpadki': together["vsota_povp"].head(6),
         'Imena': together["regija"].head(6),
@@ -385,14 +397,12 @@ TOOLTIPS = [
 s = figure(title = 'Količina odpadkov(tone) na prebivalca v letih od 2008 do 2021', x_axis_label='Število prebivalcev', x_range=(0,650000),y_axis_label='Količina odpadkov(v tonah)',y_range=(0,250000), width=1300, tooltips=TOOLTIPS)
 s.xaxis.formatter = BasicTickFormatter(use_scientific=False)
 s.yaxis.formatter = BasicTickFormatter(use_scientific=False)
-
-
 s.circle(x = 'Prebivalci', y = 'Odpadki', size = 'Razmerje', legend_group='Imena', fill_color = 'color', fill_alpha=0.6, line_color='black', source = source3)
 s.legend.location = "top_left"
 p.legend.title = "Regije"
 
 
-
+# gridi za prikaz na html
 grid = gridplot([p1,p2,p3,p6,p7,p11],ncols=3)
 grid.name = "Količine odpadkov skozi leta"
 grid2 = gridplot([p,pre], ncols=2)
