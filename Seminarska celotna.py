@@ -88,41 +88,81 @@ data = { 'x': d.loc["Goriška"].index,
 
 source = ColumnDataSource(data=data)
 
-p1 = figure(title='Gorenjska', width=500, height=340)
+p1 = figure(title='Gorenjska', width=380, height=250)
 p1.title.text_font_size = "18px"
+p1.title.text_font_style = 'bold italic'
+p1.background_fill_color = 'lightcyan'
 p1.title.text_color = "red"
 p1.line(x='x',y='y1', source=source,color='red', line_width=3)
 p1.line(x='x',y='y13', source=source,color='black',legend_label="Slovenija", line_width=3)
 
-p2 = figure(title='Goriška', width=500, height=340)
+p2 = figure(title='Goriška', width=380, height=250)
 p2.title.text_font_size = "18px"
 p2.title.text_color = "blue"
 p2.line(x='x',y='y2', source=source,color='blue',line_width=3)
 p2.line(x='x',y='y13', source=source,color='black',legend_label="Slovenija", line_width=3)
 
-p3 = figure(title='Jugovzhodna', width=500, height=340)
+p3 = figure(title='Jugovzhodna', width=380, height=250)
 p3.title.text_font_size = "18px"
 p3.title.text_color = "gold"
 p3.line(x='x',y='y3', source=source,color='gold', line_width=3)
 p3.line(x='x',y='y13', source=source,color='black',legend_label="Slovenija", line_width=3)
 
-p6 = figure(title='Osrednjeslovenska', width=500, height=340)
+p4 = figure(title='Koroška', width=380, height=250)
+p4.title.text_font_size = "18px"
+p4.title.text_color = "gray"
+p4.line(x='x',y='y4', source=source,color='gray', line_width=3)
+p4.line(x='x',y='y13', source=source,color='black',legend_label="Slovenija", line_width=3)
+
+p5 = figure(title='Obalno-kraška', width=380, height=250)
+p5.title.text_font_size = "18px"
+p5.title.text_color = "cyan"
+p5.line(x='x',y='y5', source=source,color='cyan', line_width=3)
+p5.line(x='x',y='y13', source=source,color='black',legend_label="Slovenija", line_width=3)
+
+p6 = figure(title='Osrednjeslovenska', width=380, height=250)
 p6.title.text_font_size = "18px"
 p6.title.text_color = "green"
 p6.line(x='x',y='y6', source=source,color='green', line_width=3)
 p6.line(x='x',y='y13', source=source,color='black',legend_label="Slovenija", line_width=3)
 
-p7 = figure(title='Podravska', width=500, height=340)
+p7 = figure(title='Podravska', width=380, height=250)
 p7.title.text_font_size = "18px"
 p7.title.text_color = "orange"
 p7.line(x='x',y='y7', source=source,color='orange', line_width=3)
 p7.line(x='x',y='y13', source=source,color='black',legend_label="Slovenija", line_width=3)
 
-p11 = figure(title='Savinjska', width=500, height=340)
+p8 = figure(title='Pomurska', width=380, height=250)
+p8.title.text_font_size = "18px"
+p8.title.text_color = "brown"
+p8.line(x='x',y='y8', source=source,color='brown', line_width=3)
+p8.line(x='x',y='y13', source=source,color='black',legend_label="Slovenija", line_width=3)
+
+p9 = figure(title='Posavska', width=380, height=250)
+p9.title.text_font_size = "18px"
+p9.background_fill_color = 'lightcyan'
+p9.title.text_color = "hotpink"
+p9.line(x='x',y='y9', source=source,color='hotpink', line_width=3)
+p9.line(x='x',y='y13', source=source,color='black',legend_label="Slovenija", line_width=3)
+
+p10 = figure(title='Primorsko-notranjska', width=380, height=250)
+p10.title.text_font_size = "18px"
+p10.title.text_color = "purple"
+p10.line(x='x',y='y10', source=source,color='purple', line_width=3)
+p10.line(x='x',y='y13', source=source,color='black',legend_label="Slovenija", line_width=3)
+
+p11 = figure(title='Savinjska', width=380, height=250)
 p11.title.text_font_size = "18px"
 p11.title.text_color = "magenta"
 p11.line(x='x',y='y11', source=source,color='magenta', line_width=3)
 p11.line(x='x',y='y13', source=source,color='black',legend_label="Slovenija", line_width=3)
+
+p12 = figure(title='Zasavska', width=380, height=250)
+p12.title.text_font_size = "18px"
+p12.title.text_color = "skyblue"
+p12.line(x='x',y='y12', source=source,color='skyblue', line_width=3)
+p12.line(x='x',y='y13', source=source,color='black',legend_label="Slovenija", line_width=3)
+
 
 # --------------------------------------TORTNI DIAGRAM - seštejem količine vseh let po regijah------------------------------------------------
 
@@ -285,57 +325,90 @@ podatki= { 'x': normalized_slo[3:].index,
 
 source2 = ColumnDataSource(data=podatki)
 
-f1 = figure(title='Gorenjska', width=500, height=340)
+f1 = figure(title='Gorenjska', width=470, height=300)
 f1.title.text_font_size = "20px"
+f1.title.text_font_style = 'bold italic'
+f1.background_fill_color = 'lightcyan'
 f1.title.text_color = "red"
 f1.line(x='x',y='y_1', source=podatki,color='red', legend_label="Zaposleni", line_width=3)
 f1.line(x='x',y='y1', source=podatki,color='black',legend_label="Odpadki", line_width=3)
-f1.legend.location = "top_center"
 
-f2 = figure(title='Goriška', width=500, height=340)
+f2 = figure(title='Goriška', width=470, height=300)
 f2.title.text_font_size = "20px"
 f2.title.text_color = "blue"
 f2.line(x='x',y='y_2', source=podatki,color='blue', legend_label="Zaposleni", line_width=3)
 f2.line(x='x',y='y2', source=podatki,color='black',legend_label="Odpadki", line_width=3)
-f2.legend.location = "top_center"
 
-f3 = figure(title='Jugovzhodna', width=500, height=340)
+f3 = figure(title='Jugovzhodna', width=470, height=300)
 f3.title.text_font_size = "20px"
 f3.title.text_color = "gold"
 f3.line(x='x',y='y_3', source=podatki,color='gold', legend_label="Zaposleni", line_width=3)
 f3.line(x='x',y='y3', source=podatki,color='black',legend_label="Odpadki", line_width=3)
-f3.legend.location = "top_center"
 
-f6 = figure(title='Osrednjeslovenska', width=500, height=340)
+f4 = figure(title='Koroška', width=470, height=300)
+f4.title.text_font_size = "20px"
+f4.title.text_color = "gray"
+f4.line(x='x',y='y_4', source=podatki,color='gray', legend_label="Zaposleni", line_width=3)
+f4.line(x='x',y='y4', source=podatki,color='black',legend_label="Odpadki", line_width=3)
+
+f5 = figure(title='Obalno-kraška', width=470, height=300)
+f5.title.text_font_size = "20px"
+f5.title.text_color = "cyan"
+f5.line(x='x',y='y_5', source=podatki,color='cyan', legend_label="Zaposleni", line_width=3)
+f5.line(x='x',y='y5', source=podatki,color='black',legend_label="Odpadki", line_width=3)
+
+f6 = figure(title='Osrednjeslovenska', width=470, height=300)
 f6.title.text_font_size = "20px"
 f6.title.text_color = "green"
 f6.line(x='x',y='y_6', source=podatki,color='green', legend_label="Zaposleni", line_width=3)
 f6.line(x='x',y='y6', source=podatki,color='black',legend_label="Odpadki", line_width=3)
-f6.legend.location = "top_center"
 
-f7 = figure(title='Podravska', width=500, height=340)
+f7 = figure(title='Podravska', width=470, height=300)
 f7.title.text_font_size = "20px"
 f7.title.text_color = "orange"
 f7.line(x='x',y='y_7', source=podatki,color='orange', legend_label="Zaposleni", line_width=3)
 f7.line(x='x',y='y7', source=podatki,color='black',legend_label="Odpadki", line_width=3)
-f7.legend.location = "top_center"
 
-f11 = figure(title='Savinjska', width=500, height=340)
+f8 = figure(title='Pomurska', width=470, height=300)
+f8.title.text_font_size = "20px"
+f8.title.text_color = "brown"
+f8.line(x='x',y='y_8', source=podatki,color='brown', legend_label="Zaposleni", line_width=3)
+f8.line(x='x',y='y8', source=podatki,color='black',legend_label="Odpadki", line_width=3)
+
+f9 = figure(title='Posavska', width=470, height=300)
+f9.title.text_font_size = "20px"
+f9.background_fill_color = 'lightcyan'
+f9.title.text_color = "hotpink"
+f9.line(x='x',y='y_9', source=podatki,color='hotpink', legend_label="Zaposleni", line_width=3)
+f9.line(x='x',y='y9', source=podatki,color='black',legend_label="Odpadki", line_width=3)
+
+f10 = figure(title='Primorsko-notranjska', width=470, height=300)
+f10.title.text_font_size = "20px"
+f10.title.text_color = "purple"
+f10.line(x='x',y='y_10', source=podatki,color='purple', legend_label="Zaposleni", line_width=3)
+f10.line(x='x',y='y10', source=podatki,color='black',legend_label="Odpadki", line_width=3)
+
+f11 = figure(title='Savinjska', width=470, height=300)
 f11.title.text_font_size = "20px"
 f11.title.text_color = "magenta"
 f11.line(x='x',y='y_11', source=podatki,color='magenta', legend_label="Zaposleni", line_width=3)
 f11.line(x='x',y='y11', source=podatki,color='black',legend_label="Odpadki", line_width=3)
-f11.legend.location = "top_center"
 
-f13 = figure(title='Slovenija', width=1250, height=700)
+f12 = figure(title='Zasavska', width=470, height=300)
+f12.title.text_font_size = "20px"
+f12.title.text_color = "skyblue"
+f12.line(x='x',y='y_12', source=podatki,color='skyblue', legend_label="Zaposleni", line_width=3)
+f12.line(x='x',y='y12', source=podatki,color='black',legend_label="Odpadki", line_width=3)
+
+f13 = figure(title='Slovenija', width=470, height=300)
 f13.title.text_font_size = "20px"
 f13.title.text_color = "skyblue"
-f13.line(x='x',y='y_13', source=podatki,color='skyblue',legend_label="Zaposleni" ,line_width=3)
+f13.line(x='x',y='y_13', source=podatki,color='skyblue', line_width=3)
 f13.line(x='x',y='y13', source=podatki,color='black',legend_label="Odpadki", line_width=3)
-f13.legend.location = "top_center"
-
-gridF=gridplot([f1,f2,f3,f6,f7,f11], ncols=3)
-
+'''
+grid = gridplot([p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,p11,p12], ncols=4)
+show(grid)
+'''
 # pruredim dataframe da dobim enake letnice pri obeh
 vsi_brez = vsi.iloc[:,6:]
 preb_brez = po_regijah.iloc[:,:-1]
@@ -387,16 +460,16 @@ s.xaxis.formatter = BasicTickFormatter(use_scientific=False)
 s.yaxis.formatter = BasicTickFormatter(use_scientific=False)
 
 
-s.circle(x = 'Prebivalci', y = 'Odpadki', size = 'Razmerje', legend_group='Imena', fill_color = 'color', fill_alpha=0.6, line_color='black', source = source3)
+s.circle(x = 'Prebivalci', y = 'Odpadki', size = 'Razmerje', legend_group='Imena', tools='click', fill_color = 'color', fill_alpha=0.6, line_color='black', source = source3)
 s.legend.location = "top_left"
 p.legend.title = "Regije"
 
 
 
-grid = gridplot([p1,p2,p3,p6,p7,p11],ncols=3)
+grid = gridplot([p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,p11,p12],ncols=4)
 grid.name = "Količine odpadkov skozi leta"
 grid2 = gridplot([p,pre], ncols=2)
-grid3 = gridplot([grid, grid2, s, gridF, f13], ncols=1)
+grid3 = gridplot([grid, grid2, s], ncols=1)
 
 show(grid3)
 
