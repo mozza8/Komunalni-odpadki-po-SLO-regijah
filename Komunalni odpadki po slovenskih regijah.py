@@ -101,11 +101,11 @@ p2.title.text_color = "blue"
 p2.line(x='x',y='y2', source=source,color='blue',line_width=3)
 p2.line(x='x',y='y13', source=source,color='black',legend_label="Slovenija", line_width=3)
 
-p3 = figure(title='Jugovzhodna', width=500, height=340)
-p3.title.text_font_size = "18px"
-p3.title.text_color = "gold"
-p3.line(x='x',y='y3', source=source,color='gold', line_width=3)
-p3.line(x='x',y='y13', source=source,color='black',legend_label="Slovenija", line_width=3)
+p5 = figure(title='Obalno-kraška', width=500, height=340)
+p5.title.text_font_size = "18px"
+p5.title.text_color = "cyan"
+p5.line(x='x',y='y5', source=source,color='cyan', line_width=3)
+p5.line(x='x',y='y13', source=source,color='black',legend_label="Slovenija", line_width=3)
 
 p6 = figure(title='Osrednjeslovenska', width=500, height=340)
 p6.title.text_font_size = "18px"
@@ -304,12 +304,12 @@ f2.line(x='x',y='y_2', source=podatki,color='blue', legend_label="Zaposleni", li
 f2.line(x='x',y='y2', source=podatki,color='black',legend_label="Odpadki", line_width=3)
 f2.legend.location = "top_center"
 
-f3 = figure(title='Jugovzhodna', width=500, height=340)
-f3.title.text_font_size = "20px"
-f3.title.text_color = "gold"
-f3.line(x='x',y='y_3', source=podatki,color='gold', legend_label="Zaposleni", line_width=3)
-f3.line(x='x',y='y3', source=podatki,color='black',legend_label="Odpadki", line_width=3)
-f3.legend.location = "top_center"
+f5 = figure(title='Obalno-kraška', width=500, height=340)
+f5.title.text_font_size = "20px"
+f5.title.text_color = "cyan"
+f5.line(x='x',y='y_5', source=podatki,color='cyan', legend_label="Zaposleni", line_width=3)
+f5.line(x='x',y='y5', source=podatki,color='black',legend_label="Odpadki", line_width=3)
+f5.legend.location = "top_center"
 
 f6 = figure(title='Osrednjeslovenska', width=500, height=340)
 f6.title.text_font_size = "20px"
@@ -334,13 +334,13 @@ f11.legend.location = "top_center"
 
 f13 = figure(title='Slovenija', width=1250, height=700)
 f13.title.text_font_size = "20px"
-f13.title.text_color = "skyblue"
-f13.line(x='x',y='y_13', source=podatki,color='skyblue',legend_label="Zaposleni" ,line_width=3)
+f13.title.text_color = "teal"
+f13.line(x='x',y='y_13', source=podatki,color='teal',legend_label="Zaposleni" ,line_width=3)
 f13.line(x='x',y='y13', source=podatki,color='black',legend_label="Odpadki", line_width=3)
 f13.legend.location = "top_center"
 
 # grid grafov zaposleni v odpadki
-gridF=gridplot([f1,f2,f3,f6,f7,f11], ncols=3)
+gridF=gridplot([f1,f2,f5,f6,f7,f11], ncols=3)
 
 # pruredim dataframe da dobim enake letnice pri obeh
 vsi_brez = vsi.iloc[:,6:]                 #      Odpadki po regijah od leta 2008 do 2021
@@ -371,7 +371,7 @@ together = pd.merge(data_smeti, data_prebivalci, on=['regija'])
 together['na_prebivalca(tone)'] = together['vsota_povp'] / together['sestevek_povp']
 
 # sortiram po velikosti prebivalcev
-together = together.sort_values(by=['sestevek_povp'], ascending=False)
+together = together.sort_values(by=['vsota_povp'], ascending=False)
 print(together)
 
 # -----------------------------------------------------------------------------------BUBBLE GRAF------------------------------------------------------------------------------------
@@ -403,7 +403,7 @@ p.legend.title = "Regije"
 
 
 # gridi za prikaz na html
-grid = gridplot([p1,p2,p3,p6,p7,p11],ncols=3)
+grid = gridplot([p1,p2,p5,p6,p7,p11],ncols=3)
 grid.name = "Količine odpadkov skozi leta"
 grid2 = gridplot([p,pre], ncols=2)
 grid3 = gridplot([grid, grid2, s, gridF, f13], ncols=1)
